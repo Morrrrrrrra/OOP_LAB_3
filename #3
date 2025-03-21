@@ -1,0 +1,47 @@
+using System;
+public class Container<T> where T : IComparable<T>
+{
+    private T _item;
+    public Container(T item)     // Конструктор для встановлення елемента
+    {
+        _item = item;
+    }
+    public void Compare(T otherItem)    // Порівняння елемента з іншим
+    {
+        int result = _item.CompareTo(otherItem);
+        if (result < 0)
+        {
+            Console.WriteLine("The first item is less than the second.");
+        }
+        else if (result > 0)
+        {
+            Console.WriteLine("The first item is greater than the second.");
+        }
+        else
+        {
+            Console.WriteLine("The items are equal.");
+        }
+    }
+}
+public class Person : IComparable<Person>
+{
+    public int Age { get; set; }
+    public Person(int age)
+    {
+        Age = age;
+    }
+    public int CompareTo(Person other)       // Порівняння людей за віком
+    {
+        return this.Age.CompareTo(other.Age);
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Person person1 = new Person(30);   // Створення двох об'єктів типу Person
+        Person person2 = new Person(25);
+        Container<Person> container = new Container<Person>(person1);     // Створення контейнера для person1
+        container.Compare(person2);      // Порівняння person1 з person2
+    }
+}
