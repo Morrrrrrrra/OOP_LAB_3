@@ -1,0 +1,38 @@
+using System;
+class BankAccount
+{
+    public void GetAccountType()
+    {
+        Console.WriteLine("Рахунок: Загальний банківський рахунок");
+    }
+    public virtual void CalculateInterest()
+    {
+        Console.WriteLine("Процентна ставка: Стандартна ставка для банківських рахунків");
+    }
+}
+class SavingsAccount : BankAccount
+{
+    public new void GetAccountType()          // Приховання методу
+    {
+        Console.WriteLine("Рахунок: Ощадний рахунок");
+    }
+    public override void CalculateInterest()  // Перевизначення методу
+    {
+        Console.WriteLine("Процентна ставка: Вища ставка для ощадних рахунків");
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        BankAccount generalAccount = new BankAccount();
+        generalAccount.GetAccountType();        // Виведе "Рахунок: Загальний банківський рахунок"
+        generalAccount.CalculateInterest();     // Виведе "Процентна ставка: Стандартна ставка..."
+        SavingsAccount savingsAccount = new SavingsAccount();
+        savingsAccount.GetAccountType();        // Виведе "Рахунок: Ощадний рахунок"
+        savingsAccount.CalculateInterest();     // Виведе "Процентна ставка: Вища ставка..."
+        BankAccount referenceAccount = new SavingsAccount();
+        referenceAccount.GetAccountType();     // Виведе "Рахунок: Загальний банківський рахунок" (прихований метод)
+        referenceAccount.CalculateInterest();  // Виведе "Процентна ставка: Вища ставка..." (перевизначений метод)
+    }
+}
