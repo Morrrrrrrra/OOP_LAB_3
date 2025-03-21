@@ -1,0 +1,55 @@
+using System;
+public class Workers
+{
+    public string Name { get; set; }
+    public string Position { get; set; }
+    public Workers(string name, string position)
+    {
+        Name = name;
+        Position = position;
+    }
+    public virtual void Show()
+    {
+        Console.WriteLine($"{Name} - {Position}");
+    }
+}
+class Director : Workers
+{
+    public Director(string name) : base(name, "Director") { }
+    public override void Show()
+    {
+        Console.WriteLine($"{Name} - {Position}");
+    }
+}
+class Manager : Workers
+{
+    public Manager(string name) : base(name, "Manager") { }
+    public override void Show()
+    {
+        Console.WriteLine($"{Name} - {Position}");
+    }
+}
+class Programmer : Workers
+{
+    public Programmer(string name) : base(name, "Prorammer") { }
+    public override void Show()
+    {
+        Console.WriteLine($"{Name} - {Position}");
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        Workers[] workers = new Workers[4];
+        workers[0] = new Workers("Sofiia", "Accountant");
+        workers[1] = new Director("Andrew");
+        workers[2] = new Manager("Oleksandr");
+        workers[3] = new Programmer("Maria");
+        foreach (Workers w in workers)
+        {
+            w.Show();
+        }
+        Console.ReadKey();
+    }
+}
